@@ -33,7 +33,7 @@
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
-        <HintPath>..\packages\Moq\lib\net40\Moq.dll</HintPath>
+      <HintPath>..\packages\Moq\lib\net40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,6 +47,9 @@
     <Compile Include="Tests.cs" />
     <Compile Include="BoardPanelTest.cs" />
     <Compile Include="CellTest.cs" />
+    <Compile Include="GameControllerTest.cs" />
+    <Compile Include="ClickControllerTest.cs" />
+    <Compile Include="GUIPlayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TicTacToeGUI\TicTacToeGUI.csproj">

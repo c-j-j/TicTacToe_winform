@@ -3,7 +3,6 @@ using TicTacToe;
 using System;
 using System.Windows.Forms;
 using System.Drawing;
-using System.Linq;
 
 namespace TicTacToeGUI
 {
@@ -11,16 +10,16 @@ namespace TicTacToeGUI
     {
         IList<Cell> cells;
 
-        public BoardPanel(int size, int cellCount)
+        public BoardPanel(int size, int cellCount, Controller controller)
         {
             cells = new List<Cell>();
             this.Size = new Size(size, size);
-            InitiateBoard(size, cellCount);
+            InitiateBoard(size, cellCount, controller);
         }
 
-        void InitiateBoard(int size, int cellCount)
+        void InitiateBoard(int size, int cellCount, Controller controller)
         {
-            BuildCells(GetColumnCount(cellCount), CalculateCellSize(size, cellCount));
+            BuildCells(GetColumnCount(cellCount), CalculateCellSize(size, cellCount), controller);
         }
 
         public void UpdateBoard(Board board)
@@ -36,7 +35,7 @@ namespace TicTacToeGUI
             return mark == Mark.EMPTY ? "" : mark.ToString();
         }
 
-        void BuildCells(double columnCount, int cellHeight)
+        void BuildCells(double columnCount, int cellHeight, Controller controller)
         {
             int positionCounter = 0;
             var cellXPosition = 0;
@@ -45,7 +44,7 @@ namespace TicTacToeGUI
             {
                 for (int column = 0; column < columnCount; column++)
                 {
-                    var cell = new Cell(null, positionCounter++);
+                    var cell = new Cell(controller, positionCounter++);
                     formatCell(cell, cellHeight, cellXPosition, cellYPosition);
                     cellXPosition += cellHeight;
                     cells.Add(cell);

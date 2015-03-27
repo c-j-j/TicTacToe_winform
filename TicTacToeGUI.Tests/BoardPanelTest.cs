@@ -13,7 +13,7 @@ namespace TicTacToeGUI
 
         [SetUp]
         public void Setup(){
-            boardPanel = new BoardPanel(90, 9);
+            boardPanel = new BoardPanel(90, 9, null);
         }
 
         [Test]
@@ -77,7 +77,7 @@ namespace TicTacToeGUI
 
         void TestCellLocation(int position, int X, int Y)
         {
-            boardPanel = new BoardPanel(90, 9);
+            boardPanel = new BoardPanel(90, 9, null);
             var cells = boardPanel.Controls.Cast<Control>();
             var topMiddleCell = cells.ElementAt(position);
             Assert.AreEqual(X, topMiddleCell.Location.X);

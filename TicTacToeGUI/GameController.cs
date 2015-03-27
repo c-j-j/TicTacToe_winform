@@ -4,22 +4,25 @@ namespace TicTacToeGUI
 {
     public class GameController : Controller
     {
-        readonly Display gameView;
+        readonly GameRunnerWrapper gameRunnerWrapper;
+        readonly ClickController clickController;
 
-        public GameController(Display display)
+        public GameController(GameRunnerWrapper gameRunnerWrapper,
+            ClickController clickController)
         {
-            this.gameView = display;
+            this.clickController = clickController;
+            this.gameRunnerWrapper = gameRunnerWrapper;
         }
 
         public void Start()
         {
-            var runner = new GameRunner(new Game(new Board(), new ComputerPlayer(Mark.X, Mark.O), new ComputerPlayer(Mark.O, Mark.X)), 
-                         gameView);
-            runner.Run();
+            gameRunnerWrapper.Run();
         }
 
         public void CellClicked(int position)
         {
+            clickController.AddClickEvent(position);
+            gameRunnerWrapper.Run();
         }
     }
 }

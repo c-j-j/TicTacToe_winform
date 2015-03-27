@@ -9,7 +9,9 @@ namespace TicTacToeGUI
         {
             var gameForm = new GameForm();
             var guiDisplay = new GameFormAdapter(gameForm);
-            var controller = new GameController(guiDisplay);
+            var clickController = new ClickController();
+            var runner = new GameRunner(new Game(new Board(), new GUIPlayer(Mark.X, clickController), new GUIPlayer(Mark.O, clickController)), guiDisplay); 
+            var controller = new GameController(new GameRunnerWrapper(runner), clickController);
             gameForm.SetController(controller);
             Application.Run(gameForm);
         }
