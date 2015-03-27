@@ -1,18 +1,25 @@
 using TicTacToe;
 
-public class GameController
+namespace TicTacToeGUI
 {
-    readonly Display gameView;
-
-    public GameController(Display display)
+    public class GameController : Controller
     {
-        this.gameView = display;
-    }
+        readonly Display gameView;
 
-    public void Start()
-    {
-        var runner = new GameRunner(new Game(new Board(), new ComputerPlayer(Mark.X, Mark.O), new ComputerPlayer(Mark.O, Mark.X)), 
-                gameView);
-        runner.Run();
+        public GameController(Display display)
+        {
+            this.gameView = display;
+        }
+
+        public void Start()
+        {
+            var runner = new GameRunner(new Game(new Board(), new ComputerPlayer(Mark.X, Mark.O), new ComputerPlayer(Mark.O, Mark.X)), 
+                         gameView);
+            runner.Run();
+        }
+
+        public void CellClicked(int position)
+        {
+        }
     }
 }

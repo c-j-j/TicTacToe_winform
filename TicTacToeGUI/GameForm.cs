@@ -21,7 +21,7 @@ namespace TicTacToeGUI
         Label label;
         public GameForm()
         {
-            var boardPanel = new BoardPanel(100, 9);
+            var boardPanel = new BoardPanel(300, 9);
             this.Controls.Add(boardPanel);
             //boardPanel.Location = new Point(10, 10);
             //this.Controls.Add(boardPanel);
@@ -49,8 +49,6 @@ namespace TicTacToeGUI
             label.Refresh();
             Application.DoEvents();
         }
-
-        Button button;
 
         void clickHandler(object sender, EventArgs e)
         {

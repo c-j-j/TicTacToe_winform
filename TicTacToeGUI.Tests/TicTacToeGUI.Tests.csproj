@@ -32,14 +32,21 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Moq">
+        <HintPath>..\packages\Moq\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Drawing" />
+    <Reference Include="TicTacToe">
+      <HintPath>../../TicTacToe/TicTacToe/bin/Release/TicTacToe.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tests.cs" />
     <Compile Include="BoardPanelTest.cs" />
+    <Compile Include="CellTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TicTacToeGUI\TicTacToeGUI.csproj">

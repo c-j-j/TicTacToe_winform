@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using TicTacToe;
 using NUnit.Framework;
 using System.Linq;
 using System.Windows.Forms;
@@ -9,10 +11,14 @@ namespace TicTacToeGUI
     {
         BoardPanel boardPanel;
 
+        [SetUp]
+        public void Setup(){
+            boardPanel = new BoardPanel(90, 9);
+        }
+
         [Test]
         public void BuildsBoardPanelWithGivenSize()
         {
-            boardPanel = new BoardPanel(90, 3);
             Assert.AreEqual(boardPanel.Size.Height, 90);
             Assert.AreEqual(boardPanel.Size.Width, 90);
         }
@@ -20,15 +26,14 @@ namespace TicTacToeGUI
         [Test]
         public void BuildsNineCells()
         {
-            boardPanel = new BoardPanel(90, 9);
             Assert.AreEqual(boardPanel.Controls.Count, 9);
         }
+
 
         [Test]
         public void CalculatesSizeOfCells()
         {
-            boardPanel = new BoardPanel(90, 9);
-            var cells = boardPanel.Controls.Cast<Control>();
+            var cells = GetCellsFromBoardPanel();
             Assert.AreEqual(cells.First().Size.Height, 30);
             Assert.AreEqual(cells.First().Size.Width, 30);
         }
@@ -45,6 +50,29 @@ namespace TicTacToeGUI
             TestCellLocation(6, 0, 60);
             TestCellLocation(7, 30, 60);
             TestCellLocation(8, 60, 60);
+        }
+
+        [Test]
+        public void UpdatesBoardCellsWithDataFromBoard()
+        {
+            var board = new Board();
+            board.AddMove(new Move(Mark.X, 0));
+            boardPanel.UpdateBoard(board);
+            var cells = GetCellsFromBoardPanel();
+            Assert.AreEqual(Mark.X.ToString(), cells.First().Text);
+        }
+
+        [Test]
+        public void PopulatesEmptyMarkWithNoText()
+        {
+            boardPanel.UpdateBoard(new Board());
+            var cells = GetCellsFromBoardPanel();
+            Assert.AreEqual("", cells.First().Text);
+        }
+
+        IEnumerable<Control> GetCellsFromBoardPanel()
+        {
+            return boardPanel.Controls.Cast<Control>();
         }
 
         void TestCellLocation(int position, int X, int Y)

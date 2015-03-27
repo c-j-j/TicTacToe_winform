@@ -19,7 +19,7 @@ namespace TicTacToeGUI
             formPart.PrintMessage(message);
         }
 
-        public override void PrintBoard(TicTacToe.Board board)
+        public override void PrintBoard(Board board)
         {
             Console.WriteLine("printed board");
         }

@@ -1,22 +1,39 @@
+using System.Collections.Generic;
+using TicTacToe;
 using System;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Linq;
 
 namespace TicTacToeGUI
 {
     public class BoardPanel : Panel
     {
+        IList<Cell> cells;
+
         public BoardPanel(int size, int cellCount)
         {
+            cells = new List<Cell>();
             this.Size = new Size(size, size);
             InitiateBoard(size, cellCount);
         }
 
-
         void InitiateBoard(int size, int cellCount)
         {
             BuildCells(GetColumnCount(cellCount), CalculateCellSize(size, cellCount));
+        }
 
+        public void UpdateBoard(Board board)
+        {
+            for (int i = 0; i < board.Positions().Count; i++)
+            {
+                cells[i].Text = MarkToText(board.Positions()[i]);
+            }
+        }
+
+        string MarkToText(Mark mark)
+        {
+            return mark == Mark.EMPTY ? "" : mark.ToString();
         }
 
         void BuildCells(double columnCount, int cellHeight)
@@ -28,9 +45,10 @@ namespace TicTacToeGUI
             {
                 for (int column = 0; column < columnCount; column++)
                 {
-                    var cell = new Cell(positionCounter++);
+                    var cell = new Cell(null, positionCounter++);
                     formatCell(cell, cellHeight, cellXPosition, cellYPosition);
                     cellXPosition += cellHeight;
+                    cells.Add(cell);
                     Controls.Add(cell);
                 }
                 cellXPosition = 0;
