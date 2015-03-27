@@ -33,5 +33,12 @@ namespace TicTacToeGUI.Tests
             gameController.CellClicked(3);
             clickController.Verify(m => m.AddClickEvent(3));
         }
+
+        [Test]
+        public void StartInvokesGameRunner()
+        {
+            gameController.Start();
+            gameRunnerAdapter.Verify(m => m.Run());
+        }
     }
 }

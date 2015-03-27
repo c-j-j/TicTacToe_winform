@@ -50,6 +50,7 @@
     <Compile Include="GameControllerTest.cs" />
     <Compile Include="ClickControllerTest.cs" />
     <Compile Include="GUIPlayer.cs" />
+    <Compile Include="GameFormAdapterTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TicTacToeGUI\TicTacToeGUI.csproj">

@@ -7,7 +7,7 @@ namespace TicTacToeGUI
 {
     public class GameForm : Form
     {
-        GameController controller;
+        Controller controller;
         BoardPanel boardPanel;
         Label statusLabel;
 
@@ -18,7 +18,15 @@ namespace TicTacToeGUI
             CenterToScreen();
         }
 
-        public void SetController(GameController controller)
+        public Label StatusLabel
+        {
+            get
+            {
+                return statusLabel;
+            }
+        }
+
+        public void SetController(Controller controller)
         {
             this.controller = controller;
         }
@@ -27,7 +35,7 @@ namespace TicTacToeGUI
         {
             var startButton = new Button();
             startButton.Location = new Point(10, 5);
-            startButton.Text = "New Game";
+            startButton.Text = "Play Game";
             startButton.Click += CreateGame;
             this.Controls.Add(startButton);
         }
@@ -48,7 +56,7 @@ namespace TicTacToeGUI
             controller.Start();
         }
 
-        public void PrintBoard(Board board)
+        public virtual void PrintBoard(Board board)
         {
            boardPanel.UpdateBoard(board);
            boardPanel.Update();
@@ -56,7 +64,7 @@ namespace TicTacToeGUI
            Application.DoEvents();
         }
 
-        public void PrintMessage(string message)
+        public virtual void PrintMessage(string message)
         {
             statusLabel.Text = message;
             statusLabel.Update();
