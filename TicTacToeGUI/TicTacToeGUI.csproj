@@ -45,11 +45,9 @@
     <Compile Include="GameForm.cs" />
     <Compile Include="BoardPanel.cs" />
     <Compile Include="Cell.cs" />
-    <Compile Include="Controller.cs" />
     <Compile Include="GameRunnerWrapper.cs" />
     <Compile Include="ClickController.cs" />
     <Compile Include="GUIPlayer.cs" />
-    <Compile Include="GUIFormFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,6 +6,11 @@ namespace TicTacToeGUI
     {
         readonly GameRunner gameRunner;
 
+        public GameRunnerWrapper()
+        {
+            //Used by mocking library
+        }
+
         public GameRunnerWrapper(GameRunner gameRunner)
         {
             this.gameRunner = gameRunner;

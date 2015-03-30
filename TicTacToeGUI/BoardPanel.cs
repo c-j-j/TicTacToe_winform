@@ -10,14 +10,14 @@ namespace TicTacToeGUI
     {
         IList<Cell> cells;
 
-        public BoardPanel(int size, int cellCount, Controller controller)
+        public BoardPanel(int size, int cellCount, GameController controller)
         {
             cells = new List<Cell>();
             this.Size = new Size(size, size);
             InitiateBoard(size, cellCount, controller);
         }
 
-        void InitiateBoard(int size, int cellCount, Controller controller)
+        void InitiateBoard(int size, int cellCount, GameController controller)
         {
             BuildCells(GetColumnCount(cellCount), CalculateCellSize(size, cellCount), controller);
         }
@@ -35,7 +35,7 @@ namespace TicTacToeGUI
             return mark == Mark.EMPTY ? "" : mark.ToString();
         }
 
-        void BuildCells(double columnCount, int cellHeight, Controller controller)
+        void BuildCells(double columnCount, int cellHeight, GameController controller)
         {
             int positionCounter = 0;
             var cellXPosition = 0;

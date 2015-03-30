@@ -44,13 +44,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Tests.cs" />
     <Compile Include="BoardPanelTest.cs" />
     <Compile Include="CellTest.cs" />
     <Compile Include="GameControllerTest.cs" />
     <Compile Include="ClickControllerTest.cs" />
     <Compile Include="GUIPlayer.cs" />
-    <Compile Include="GameFormAdapterTest.cs" />
+    <Compile Include="GameFormTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TicTacToeGUI\TicTacToeGUI.csproj">

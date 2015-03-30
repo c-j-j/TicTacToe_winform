@@ -49,5 +49,12 @@ namespace TicTacToeGUI
             Assert.AreEqual(Mark.X, player.Mark);
         }
 
+        [Test]
+        public void FactoryBuildsGUIPlayer()
+        {
+            var newPlayer = new GUIPlayer.Factory(null).Build(Mark.X, Mark.O);
+            Assert.AreEqual(newPlayer.Mark, Mark.X);
+        }
+
     }
 }

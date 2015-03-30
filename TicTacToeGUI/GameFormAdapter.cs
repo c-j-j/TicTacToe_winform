@@ -1,27 +1,24 @@
-using System;
-using System.Windows.Forms;
-using System.Drawing;
 using TicTacToe;
 
 namespace TicTacToeGUI
 {
     public class GameFormAdapter : Display
     {
-        GameForm formPart;
+        readonly GameForm gameForm;
 
-        public GameFormAdapter(GameForm formPart)
+        public GameFormAdapter(GameForm gameForm)
         {
-            this.formPart = formPart;
+            this.gameForm = gameForm;
         }
 
         public override void PrintMessage(string message)
         {
-            formPart.PrintMessage(message);
+            gameForm.PrintMessage(message);
         }
 
         public override void PrintBoard(Board board)
         {
-            formPart.PrintBoard(board);
+            gameForm.PrintBoard(board);
         }
     }
 }

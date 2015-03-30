@@ -2,10 +2,16 @@ using TicTacToe;
 
 namespace TicTacToeGUI
 {
-    public class GameController : Controller
+    public class GameController
     {
         readonly GameRunnerWrapper gameRunnerWrapper;
         readonly ClickController clickController;
+
+        //used by mocking libraries
+        public GameController()
+        {
+
+        }
 
         public GameController(GameRunnerWrapper gameRunnerWrapper,
             ClickController clickController)
@@ -14,12 +20,12 @@ namespace TicTacToeGUI
             this.gameRunnerWrapper = gameRunnerWrapper;
         }
 
-        public void Start()
+        public virtual void Start()
         {
             gameRunnerWrapper.Run();
         }
 
-        public void CellClicked(int position)
+        public virtual void CellClicked(int position)
         {
             clickController.AddClickEvent(position);
             gameRunnerWrapper.Run();

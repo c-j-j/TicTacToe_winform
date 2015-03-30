@@ -4,10 +4,10 @@ namespace TicTacToeGUI
 {
     public class Cell : Button
     {
-        readonly Controller gameController;
+        readonly GameController gameController;
         readonly int position;
 
-        public Cell(Controller gameController, int position)
+        public Cell(GameController gameController, int position)
         {
             this.gameController = gameController;
             this.position = position;

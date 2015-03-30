@@ -33,5 +33,19 @@ namespace TicTacToeGUI
             }
         }
 
+        public class Factory : PlayerFactory
+        {
+            readonly ClickController clickController;
+
+            public Factory(ClickController clickController)
+            {
+                this.clickController = clickController;
+            }
+
+            public Player Build(Mark playerMark, Mark opponentMark)
+            {
+                return new GUIPlayer(playerMark, clickController);
+            }
+        }
     }
 }

@@ -7,15 +7,49 @@ namespace TicTacToeGUI
 {
     public class GameForm : Form
     {
-        Controller controller;
+        GameController controller;
         BoardPanel boardPanel;
         Label statusLabel;
+
+        const int BOARD_SIZE = 200;
+        Point BUTTON_LOCATION = new Point(10, 5);
+        Point STATUS_LOCATION = new Point(100, 5);
+        Point BOARD_LOCATION = new Point(10, 50);
 
         public GameForm()
         {
             SetupStatusLabel();
             SetupStartButton();
             CenterToScreen();
+        }
+
+        void SetupStartButton()
+        {
+            var startButton = new Button();
+            startButton.Location = BUTTON_LOCATION;
+            startButton.Text = "Play Game";
+            startButton.Click += StartGame;
+            Controls.Add(startButton);
+        }
+
+        void SetupStatusLabel()
+        {
+            statusLabel = new Label();
+            statusLabel.Text = "Status label";
+            statusLabel.Location = STATUS_LOCATION;
+            Controls.Add(statusLabel);
+        }
+
+        public void StartGame(object sender, EventArgs e)
+        {
+            controller.Start();
+        }
+
+        void CreateBoardPanel(Board board)
+        {
+            boardPanel = new BoardPanel(BOARD_SIZE, board.Positions().Count, controller);
+            boardPanel.Location = BOARD_LOCATION;
+            Controls.Add(boardPanel);
         }
 
         public Label StatusLabel
@@ -26,42 +60,22 @@ namespace TicTacToeGUI
             }
         }
 
-        public void SetController(Controller controller)
+        public void SetController(GameController controller)
         {
             this.controller = controller;
         }
 
-        void SetupStartButton()
-        {
-            var startButton = new Button();
-            startButton.Location = new Point(10, 5);
-            startButton.Text = "Play Game";
-            startButton.Click += CreateGame;
-            this.Controls.Add(startButton);
-        }
-
-        void SetupStatusLabel()
-        {
-            statusLabel = new Label();
-            statusLabel.Text = "Status label";
-            statusLabel.Location = new Point(100, 5);
-            this.Controls.Add(statusLabel);
-        }
-
-        void CreateGame(object sender, EventArgs e)
-        {
-            boardPanel = new BoardPanel(200, 9, controller);
-            boardPanel.Location = new Point(10, 50);
-            this.Controls.Add(boardPanel);
-            controller.Start();
-        }
-
         public virtual void PrintBoard(Board board)
         {
-           boardPanel.UpdateBoard(board);
-           boardPanel.Update();
-           boardPanel.Refresh();
-           Application.DoEvents();
+            if (boardPanel == null)
+            {
+                CreateBoardPanel(board);
+            }
+
+            boardPanel.UpdateBoard(board);
+            boardPanel.Update();
+            boardPanel.Refresh();
+            Application.DoEvents();
         }
 
         public virtual void PrintMessage(string message)
@@ -70,6 +84,17 @@ namespace TicTacToeGUI
             statusLabel.Update();
             statusLabel.Refresh();
             Application.DoEvents();
+        }
+
+        public static class Factory
+        {
+            public static GameForm Build(Game game, ClickController clickController)
+            {
+                var gameForm = new GameForm();
+                var gameRunner = new GameRunnerWrapper(new GameRunner(game, new GameFormAdapter(gameForm)));
+                gameForm.SetController(new GameController(gameRunner, clickController));
+                return gameForm;
+            }
         }
     }
 }

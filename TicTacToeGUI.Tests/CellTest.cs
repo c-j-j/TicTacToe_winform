@@ -9,7 +9,7 @@ namespace TicTacToeGUI
         [Test]
         public void InvokesControllerWithPosition()
         {
-            var mockGameController = new Mock<Controller>();
+            var mockGameController = new Mock<GameController>();
             mockGameController.Setup(gc => gc.CellClicked(5));
             var cell = new Cell(mockGameController.Object, 5);
             cell.PerformClick();
