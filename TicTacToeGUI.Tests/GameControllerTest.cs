@@ -1,19 +1,19 @@
 using Moq;
 using NUnit.Framework;
+using TicTacToe;
 
 namespace TicTacToeGUI.Tests
 {
     [TestFixture]
     public class GameControllerTest
     {
-
         GameController gameController;
-        Mock<GameRunnerWrapper> gameRunnerAdapter;
+        Mock<GameRunner> gameRunnerAdapter;
         Mock<ClickController> clickController;
 
         [SetUp]
         public void Setup(){
-            gameRunnerAdapter = new Mock<GameRunnerWrapper>();
+            gameRunnerAdapter = new Mock<GameRunner>();
             gameRunnerAdapter.Setup(m => m.Run());
             clickController = new Mock<ClickController>();
             clickController.Setup(m => m.AddClickEvent(3));

@@ -4,7 +4,8 @@ namespace TicTacToeGUI
 {
     public class GameController
     {
-        readonly GameRunnerWrapper gameRunnerWrapper;
+        readonly GameRunner gameRunner;
+
         readonly ClickController clickController;
 
         //used by mocking libraries
@@ -13,22 +14,24 @@ namespace TicTacToeGUI
 
         }
 
-        public GameController(GameRunnerWrapper gameRunnerWrapper,
+        public GameController(GameRunner gameRunner,
             ClickController clickController)
         {
             this.clickController = clickController;
-            this.gameRunnerWrapper = gameRunnerWrapper;
+            this.gameRunner = gameRunner;
         }
 
         public virtual void Start()
         {
-            gameRunnerWrapper.Run();
+            gameRunner.Run();
         }
 
         public virtual void CellClicked(int position)
         {
+            //game.playMove(position);
+            //game.continue();
             clickController.AddClickEvent(position);
-            gameRunnerWrapper.Run();
+            gameRunner.Run();
         }
     }
 }

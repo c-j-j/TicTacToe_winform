@@ -53,12 +53,7 @@ namespace TicTacToeGUI
         }
 
         public Label StatusLabel
-        {
-            get
-            {
-                return statusLabel;
-            }
-        }
+        { get { return statusLabel; } }
 
         public void SetController(GameController controller)
         {
@@ -91,7 +86,7 @@ namespace TicTacToeGUI
             public static GameForm Build(Game game, ClickController clickController)
             {
                 var gameForm = new GameForm();
-                var gameRunner = new GameRunnerWrapper(new GameRunner(game, new GameFormAdapter(gameForm)));
+                var gameRunner = new GameRunner(game, new GameFormAdapter(gameForm));
                 gameForm.SetController(new GameController(gameRunner, clickController));
                 return gameForm;
             }
