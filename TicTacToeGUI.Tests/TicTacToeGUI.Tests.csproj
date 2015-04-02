@@ -47,7 +47,6 @@
     <Compile Include="BoardPanelTest.cs" />
     <Compile Include="CellTest.cs" />
     <Compile Include="GameControllerTest.cs" />
-    <Compile Include="ClickControllerTest.cs" />
     <Compile Include="GUIPlayer.cs" />
     <Compile Include="GameFormTest.cs" />
   </ItemGroup>

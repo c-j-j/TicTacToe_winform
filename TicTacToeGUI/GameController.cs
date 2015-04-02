@@ -5,8 +5,7 @@ namespace TicTacToeGUI
     public class GameController
     {
         readonly GameRunner gameRunner;
-
-        readonly ClickController clickController;
+        GUIPlayer currentGUIPlayer;
 
         //used by mocking libraries
         public GameController()
@@ -14,10 +13,8 @@ namespace TicTacToeGUI
 
         }
 
-        public GameController(GameRunner gameRunner,
-            ClickController clickController)
+        public GameController(GameRunner gameRunner)
         {
-            this.clickController = clickController;
             this.gameRunner = gameRunner;
         }
 
@@ -28,10 +25,23 @@ namespace TicTacToeGUI
 
         public virtual void CellClicked(int position)
         {
-            //game.playMove(position);
-            //game.continue();
-            clickController.AddClickEvent(position);
+            SetPositionOnCurrentGUIPlayer(position);
             gameRunner.Run();
+        }
+
+        public void SetPositionOnCurrentGUIPlayer(int position)
+        {
+            currentGUIPlayer = CurrentPlayer() as GUIPlayer;
+            if (currentGUIPlayer != null)
+            {
+                currentGUIPlayer.SetNextPosition(position);
+            }
+        }
+
+        Player CurrentPlayer()
+        {
+            var variable = gameRunner.CurrentPlayer();
+            return variable;
         }
     }
 }

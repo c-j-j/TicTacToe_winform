@@ -4,25 +4,36 @@ namespace TicTacToeGUI
 {
     public class GUIPlayer : Player
     {
-        readonly ClickController clickController;
         Mark mark;
+        public readonly static int WAITING = -1;
 
-        public GUIPlayer(Mark mark, ClickController clickController)
+        public GUIPlayer(Mark mark)
         {
             this.mark = mark;
-            this.clickController = clickController;
+            NextPosition = WAITING;
         }
 
         public Move GetMove(Game game)
         {
-            var move = new Move(mark, clickController.RetrieveClickedPosition());
-            clickController.Reset();
+            var move = new Move(mark, NextPosition);
+            NextPosition = WAITING;
             return move;
+        }
+
+        public int NextPosition
+        {
+            get;
+            private set;
+        }
+
+        public void SetNextPosition(int position)
+        {
+            NextPosition = position;
         }
 
         public bool Ready()
         {
-            return clickController.HasClick();
+            return NextPosition != WAITING;
         }
 
         public Mark Mark
@@ -35,16 +46,9 @@ namespace TicTacToeGUI
 
         public class Factory : PlayerFactory
         {
-            readonly ClickController clickController;
-
-            public Factory(ClickController clickController)
-            {
-                this.clickController = clickController;
-            }
-
             public Player Build(Mark playerMark, Mark opponentMark)
             {
-                return new GUIPlayer(playerMark, clickController);
+                return new GUIPlayer(playerMark);
             }
         }
     }

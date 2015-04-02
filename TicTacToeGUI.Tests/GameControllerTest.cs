@@ -9,29 +9,30 @@ namespace TicTacToeGUI.Tests
     {
         GameController gameController;
         Mock<GameRunner> gameRunnerAdapter;
-        Mock<ClickController> clickController;
+        GUIPlayer guiPlayer;
 
         [SetUp]
-        public void Setup(){
+        public void Setup()
+        {
             gameRunnerAdapter = new Mock<GameRunner>();
             gameRunnerAdapter.Setup(m => m.Run());
-            clickController = new Mock<ClickController>();
-            clickController.Setup(m => m.AddClickEvent(3));
-            gameController = new GameController(gameRunnerAdapter.Object, clickController.Object);
+            guiPlayer = new GUIPlayer(Mark.X);
+            gameRunnerAdapter.Setup(m => m.CurrentPlayer()).Returns(guiPlayer);
+            gameController = new GameController(gameRunnerAdapter.Object);
         }
 
         [Test]
-        public void CellClickRunsGameRunner()
+        public void ClickedCellTriggersGameRunner()
         {
             gameController.CellClicked(3);
             gameRunnerAdapter.Verify(m => m.Run());
         }
 
         [Test]
-        public void AddsClickedCellToClickController()
+        public void ClickedCellPreparesCurrentGUIPlayer()
         {
             gameController.CellClicked(3);
-            clickController.Verify(m => m.AddClickEvent(3));
+            Assert.AreEqual(3, guiPlayer.NextPosition);
         }
 
         [Test]

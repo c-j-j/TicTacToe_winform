@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TicTacToe;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 using System.Drawing;
 
@@ -8,12 +9,12 @@ namespace TicTacToeGUI
 {
     public class BoardPanel : Panel
     {
-        IList<Cell> cells;
+        List<Cell> cells;
 
         public BoardPanel(int size, int cellCount, GameController controller)
         {
             cells = new List<Cell>();
-            this.Size = new Size(size, size);
+            Size = new Size(size, size);
             InitiateBoard(size, cellCount, controller);
         }
 
@@ -24,6 +25,7 @@ namespace TicTacToeGUI
 
         public void UpdateBoard(Board board)
         {
+            //TODO cell has information it could use to update itself via GC
             for (int i = 0; i < board.Positions().Count; i++)
             {
                 cells[i].Text = MarkToText(board.Positions()[i]);
@@ -44,18 +46,21 @@ namespace TicTacToeGUI
             {
                 for (int column = 0; column < columnCount; column++)
                 {
+                    //TODO cell formation can be used in cell class, not here
                     var cell = new Cell(controller, positionCounter++);
-                    formatCell(cell, cellHeight, cellXPosition, cellYPosition);
+                    FormatCell(cell, cellHeight, cellXPosition, cellYPosition);
                     cellXPosition += cellHeight;
                     cells.Add(cell);
-                    Controls.Add(cell);
                 }
                 cellXPosition = 0;
                 cellYPosition += cellHeight;
             }
+
+            cells.ForEach(Controls.Add);
+
         }
 
-        void formatCell(Control cell, int cellHeight, int cellXPosition, int cellYPosition)
+        void FormatCell(Control cell, int cellHeight, int cellXPosition, int cellYPosition)
         {
             cell.Size = new Size(cellHeight, cellHeight);
             cell.Location = new Point(cellXPosition, cellYPosition);

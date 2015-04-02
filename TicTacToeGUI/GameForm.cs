@@ -55,6 +55,7 @@ namespace TicTacToeGUI
         public Label StatusLabel
         { get { return statusLabel; } }
 
+        //TODO can be replaced by game runner
         public void SetController(GameController controller)
         {
             this.controller = controller;
@@ -83,11 +84,11 @@ namespace TicTacToeGUI
 
         public static class Factory
         {
-            public static GameForm Build(Game game, ClickController clickController)
+            public static GameForm Build(Game game)
             {
                 var gameForm = new GameForm();
                 var gameRunner = new GameRunner(game, new GameFormAdapter(gameForm));
-                gameForm.SetController(new GameController(gameRunner, clickController));
+                gameForm.SetController(new GameController(gameRunner));
                 return gameForm;
             }
         }

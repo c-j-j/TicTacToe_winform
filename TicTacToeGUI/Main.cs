@@ -8,15 +8,14 @@ namespace TicTacToeGUI
     {
         static public void Main()
         {
-            var clickController = new ClickController();
-            Application.Run(GameForm.Factory.Build(BuildGame(clickController), clickController));
+            Application.Run(GameForm.Factory.Build(BuildGame()));
         }
 
-        static Game BuildGame(ClickController clickController)
+        static Game BuildGame()
         {
             var playerOptions = new Dictionary<string, PlayerFactory>
             {
-                { "Human Player", new GUIPlayer.Factory(clickController) },
+                { "Human Player", new GUIPlayer.Factory() },
                 { "Computer Player", new ComputerPlayer.Factory() }
             };
 
